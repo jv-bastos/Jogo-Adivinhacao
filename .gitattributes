@@ -1,2 +1,57 @@
-# Auto detect text files and perform LF normalization
 * text=auto
+import java.util.Random;
+import java.util.Scanner;
+
+public class JogoAdivinhacao {
+
+    public static void main(String[] args) {
+        Random random = new Random();
+        Scanner scanner = new Scanner(System.in);
+
+        int numeroComputador = random.nextInt(100) + 1;
+        int tentativasMax = 10;
+        int tentativas = 0;
+        boolean acertou = false;
+
+        System.out.println("Bem-vindo ao jogo de adivinhação!");
+        System.out.println("Tente adivinhar o número entre 1 e 100. Você tem " + tentativasMax + " tentativas.");
+
+        while (tentativas < tentativasMax) {
+            System.out.print("Tentativa " + (tentativas + 1) + ": ");
+            int chute;
+
+            try {
+                chute = Integer.parseInt(scanner.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.println("Por favor, digite um número válido.");
+                continue;
+            }
+
+            tentativas++;
+
+            if (chute < 1 || chute > 100) {
+                System.out.println("O número deve estar entre 1 e 100.");
+                continue;
+            }
+
+            if (chute == numeroComputador) {
+                System.out.println("Parabéns! Você acertou o número " + numeroComputador + " em " + tentativas + " tentativas.");
+                acertou = true;
+                break;
+            } else if (chute < numeroComputador) {
+                System.out.println("O número é maior.");
+            } else {
+                System.out.println("O número é menor.");
+            }
+        }
+
+        if (!acertou) {
+            System.out.println("Suas tentativas acabaram! O número era " + numeroComputador + ". Boa sorte da próxima vez!");
+        }
+
+        scanner.close();
+    }
+    }
+
+    
+
